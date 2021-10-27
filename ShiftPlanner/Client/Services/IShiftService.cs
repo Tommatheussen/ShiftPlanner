@@ -6,6 +6,7 @@ namespace ShiftPlanner.Client.Services
     public interface IShiftService
     {
         Task<IEnumerable<ShiftDefinition>> GetShifts();
+        Task<IEnumerable<CalendarEvent>> GetCalendarEvents();
     }
 }
 

@@ -12,17 +12,32 @@ namespace ShiftPlanner.Client.Services
                 new ShiftDefinition()
                 {
                     ShiftName = "L'",
-                    StartTime = new TimeOnly(15, 30).ToString(),
-                    EndTime = new TimeOnly(21, 00).ToString()
+                    StartTime = "15:30",
+                    EndTime = "21:00"
                 },
                 new ShiftDefinition()
                 {
                     ShiftName = "V'",
-                    StartTime = new TimeOnly(07, 00).ToString(),
-                    EndTime = new TimeOnly(12, 00).ToString()
+                    StartTime = "07:00",
+                    EndTime = "12:00"
                 }
             };
             return Task.FromResult<IEnumerable<ShiftDefinition>>(shifts);
+        }
+
+        public Task<IEnumerable<CalendarEvent>> GetCalendarEvents()
+        {
+            var calendarEvents = new List<CalendarEvent>()
+            {
+                new CalendarEvent
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    ShiftName = "L'",
+                    StartTime = new DateTime(2021, 10, 14, 13, 30, 00),
+                    EndTime = new DateTime(2021, 10, 14, 21, 00, 00),
+                }
+            };
+            return Task.FromResult<IEnumerable<CalendarEvent>>(calendarEvents);
         }
     }
 }

@@ -8,24 +8,41 @@
 
 <div class="calendar-page">
     <div class="calendar-column">
-        <SfSchedule TValue="AppointmentData" Readonly="true" Width="100%" Height="100%">
-            @*<ScheduleEvents TValue="ScheduleData.AppointmentData" EventRendered="OnEventRendered"></ScheduleEvents>*@
+        <SfSchedule @ref="ScheduleRef" TValue="CalendarEvent" Readonly="true" Width="100%" Height="100%">
+            @*<ScheduleEvent s TValue="ScheduleData.AppointmentData" EventRendered="OnEventRendered"></ScheduleEvents>*@
             <ScheduleViews>
-                <ScheduleView MaxEventsPerRow="1" Option="View.Month"></ScheduleView>
+                <ScheduleView MaxEventsPerRow="1" Option="View.Month">
+                    <EventTemplate>
+                        <ScheduleEvent Event="@(context as CalendarEvent)" />
+                    </EventTemplate>
+                </ScheduleView>
             </ScheduleViews>
-            @*<ScheduleEventSettings DataSource="@DataSource"></ScheduleEventSettings>*@
+            <ScheduleEventSettings DataSource="@CalendarEventList">
+                <ScheduleField Id="Id">
+                    <FieldSubject Name="ShiftName"></FieldSubject>
+                    <FieldIsAllDay Name="FullDay"></FieldIsAllDay>
+                    <FieldStartTime Name="StartTime"></FieldStartTime>
+                    <FieldEndTime Name="EndTime"></FieldEndTime>
+                </ScheduleField>
+            </ScheduleEventSettings>
+            <ScheduleTemplates>
+                <CellTemplate>
+                    <ScheduleCell Context="@context" ShiftDropped="HandleShiftDropped" />
+                </CellTemplate>
+            </ScheduleTemplates>
         </SfSchedule>
     </div>
 
     @if (ShiftList != null)
     {
         <div class="treeview-column">
-            <SfTreeView TValue="ShiftDefinition" @ref="TreeViewRef" AllowDragAndDrop="true" CssClass="treeview-external-drag" DropArea=".content-wrapper">
-                @*<TreeViewEvents TValue="AppointmentData" OnNodeDragStop="OnTreeViewDragStop"></TreeViewEvents>*@
+            <SfTreeView TValue="ShiftDefinition">
                 <TreeViewFieldsSettings DataSource="@ShiftList" Id="ShiftName" Text="ShiftName"></TreeViewFieldsSettings>
                 <TreeViewTemplates TValue="ShiftDefinition">
                     <NodeTemplate>
-                        <div>@context.ShiftName (@context.StartTime - @context.EndTime)</div>
+                        <div draggable="true" @ondragstart="() => HandleDragStart(context)">
+                            <div>@context.ShiftName (@context.StartTime - @context.EndTime)</div>
+                        </div>
                     </NodeTemplate>
                 </TreeViewTemplates>
             </SfTreeView>

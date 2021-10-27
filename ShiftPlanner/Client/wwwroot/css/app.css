@@ -69,3 +69,21 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+
+
+
+.e-schedule .e-content-wrap .e-appointment .e-appointment-details {
+    height: 100%;
+    padding: 6px;
+}
+
+.e-schedule .e-content-wrap .e-appointment {
+    height: auto !important;
+    margin: 2px;
+    border-radius: 10px !important;
+}
+
+.e-schedule .template-wrap {
+    height: 100%;
+    white-space: normal;
+}
