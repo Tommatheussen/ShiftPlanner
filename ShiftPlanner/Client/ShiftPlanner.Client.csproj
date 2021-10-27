@@ -28,5 +28,11 @@
   <ItemGroup>
     <None Remove="Syncfusion.Blazor.Schedule" />
     <None Remove="Syncfusion.Blazor.Navigations" />
+    <None Remove="Services\" />
+    <None Remove="Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>
