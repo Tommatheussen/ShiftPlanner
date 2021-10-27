@@ -13,6 +13,8 @@ namespace ShiftPlanner.Shared
 
         [Required]
         public string EndTime { get; set; }
+
+        public string FullTimeSlot => $"{StartTime} - {EndTime}";
     }
 }
 

@@ -1,7 +1,6 @@
 ﻿@page "/"
 
 @using Syncfusion.Blazor.Schedule
-@using Syncfusion.Blazor.Navigations
 
 
 <PageTitle>Index</PageTitle>
@@ -36,16 +35,13 @@
     @if (ShiftList != null)
     {
         <div class="treeview-column">
-            <SfTreeView TValue="ShiftDefinition">
-                <TreeViewFieldsSettings DataSource="@ShiftList" Id="ShiftName" Text="ShiftName"></TreeViewFieldsSettings>
-                <TreeViewTemplates TValue="ShiftDefinition">
-                    <NodeTemplate>
-                        <div draggable="true" @ondragstart="() => HandleDragStart(context)">
-                            <div>@context.ShiftName (@context.StartTime - @context.EndTime)</div>
-                        </div>
-                    </NodeTemplate>
-                </TreeViewTemplates>
-            </SfTreeView>
+            @foreach (var shift in ShiftList)
+            {
+                <div draggable="true" class="shift-block" @ondragstart="() => HandleDragStart(shift)">
+                    <div class="shift-header">@shift.ShiftName</div>
+                    <div class="shift-times">@shift.FullTimeSlot</div>
+                </div>
+            }
         </div>
-     }
+    }
 </div>

@@ -10,4 +10,19 @@
 
 .treeview-column {
     display: flex;
+    flex-direction: column;
+}
+
+.shift-block {
+    width: max-content;
+    margin: 4px 10px;
+    padding: 10px;
+    border: 1px solid darkgrey;
+    border-radius: 15px;
+    cursor: grab;
+}
+
+.shift-block .shift-header {
+    font-weight: bold;
+    text-align: center;
 }
