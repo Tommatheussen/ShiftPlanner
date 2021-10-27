@@ -1,0 +1,89 @@
+﻿@page "/"
+
+@using Syncfusion.Blazor.Schedule
+@using Syncfusion.Blazor.Navigations
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+
+<div class="e-droppable">
+    <SfSchedule TValue="AppointmentData" @ref="ScheduleRef" Width="100%" Height="100%">
+        @*<ScheduleEvents TValue="ScheduleData.AppointmentData" EventRendered="OnEventRendered"></ScheduleEvents>*@
+        <ScheduleViews>
+            <ScheduleView MaxEventsPerRow="2" Option="View.Month"></ScheduleView>
+        </ScheduleViews>
+        @*<ScheduleEventSettings DataSource="@DataSource"></ScheduleEventSettings>*@
+    </SfSchedule>
+</div>
+
+<SfTreeView TValue="AppointmentData" @ref="TreeViewRef" AllowDragAndDrop="true" CssClass="treeview-external-drag" DropArea=".content-wrapper">
+    <TreeViewEvents TValue="AppointmentData" OnNodeDragStop="OnTreeViewDragStop"></TreeViewEvents>
+    <TreeViewFieldsSettings DataSource="@TreeViewData" Id="Id" Text="Name"></TreeViewFieldsSettings>
+    <TreeViewTemplates TValue="AppointmentData">
+        <NodeTemplate>
+            <div>@((context as AppointmentData).Subject)</div>
+        </NodeTemplate>
+    </TreeViewTemplates>
+</SfTreeView>
+
+
+@code {
+            SfSchedule<AppointmentData> ScheduleRef;
+            SfTreeView<AppointmentData> TreeViewRef;
+
+    public List<AppointmentData> TreeViewData = new List<AppointmentData>()
+    {
+        new AppointmentData
+        {
+            Id = 1,
+            Subject = "DL",
+            IsAllDay = true
+        },
+        new AppointmentData
+        {
+            Id = 2,
+            Subject = "DL2",
+            IsAllDay = true
+        }
+    };
+
+        public class AppointmentData
+        {
+            public int Id { get; set; }
+            public string Subject { get; set; }
+            public Nullable<bool> IsAllDay { get; set; }
+            public DateTime StartTime { get; set; }
+            public DateTime EndTime { get; set; }
+        }
+
+        public async void OnTreeViewDragStop(DragAndDropEventArgs args)
+        {
+            args.Cancel = true;
+
+            CellClickEventArgs cellData = await ScheduleRef.GetTargetCellAsync((int)args.Left, (int)args.Top);
+
+            if (cellData != null)
+            {
+                var resourceDetails = ScheduleRef.GetResourceByIndex(cellData.GroupIndex);
+                Random rnd = new Random();
+                int Id = rnd.Next(1000);
+                AppointmentData TreeData = TreeViewData.Where(data => data.Id.ToString() == args.DraggedNodeData.Id).First();
+                AppointmentData eventData = new AppointmentData
+                {
+                    Id = Id,
+                    Subject = TreeData.Subject,
+                    IsAllDay = cellData.IsAllDay,
+                    StartTime = cellData.StartTime,
+                    EndTime = cellData.EndTime
+                };
+
+                await ScheduleRef.AddEventAsync(eventData);
+            }
+        }
+    }
