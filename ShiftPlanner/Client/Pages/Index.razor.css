@@ -1,0 +1,13 @@
+﻿.calendar-page {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+}
+
+.calendar-column {
+    display: flex;
+}
+
+.treeview-column {
+    display: flex;
+}
