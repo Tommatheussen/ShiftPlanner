@@ -1,14 +1,23 @@
-﻿.can-drop {
+﻿:host {
+    display: flex;
+/*    flex: 1 1 auto;*/
+}
+
+.can-drop {
     padding: 1px;
 }
 
 .dropzone {
-    height: 100%;
-    margin-top: -27px; /* Shift the template up, allows dropping onto the date itself */
+    display: flex;
+    flex: 1 1 auto;
+/*    height: 100%;*/
+    /*margin-top: -27px;*/ /* Shift the template up, allows dropping onto the date itself */
 }
 
 .inner {
-    height: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    /*    height: 100%;*/
 }
 
 .can-drop .inner {

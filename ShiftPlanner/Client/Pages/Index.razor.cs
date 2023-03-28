@@ -6,6 +6,7 @@ using Syncfusion.Blazor.Navigations;
 using Syncfusion.Blazor.Schedule;
 
 using Microsoft.AspNetCore.Components.Web;
+using System.Collections.ObjectModel;
 
 namespace ShiftPlanner.Client.Pages
 {
@@ -17,14 +18,20 @@ namespace ShiftPlanner.Client.Pages
         private SfSchedule<CalendarEvent> ScheduleRef;
 
         public IEnumerable<ShiftDefinition> ShiftList;
-        public List<CalendarEvent> CalendarEventList;
+        public ObservableCollection<CalendarEvent> CalendarEventList = new ObservableCollection<CalendarEvent>();
 
         private ShiftDefinition _draggedShift;
 
         protected override async Task OnInitializedAsync()
         {
             ShiftList = await _shiftService.GetShifts();
-            CalendarEventList = await _shiftService.GetCalendarEvents() as List<CalendarEvent>;
+
+            var events = await _shiftService.GetCalendarEvents();
+
+            foreach (var e in events)
+            {
+                CalendarEventList.Add(e);
+            }
 
             await base.OnInitializedAsync();
         }
@@ -45,9 +52,16 @@ namespace ShiftPlanner.Client.Pages
                 Description = $"{_draggedShift.StartTime} - {_draggedShift.EndTime}"
             };
 
+            Console.WriteLine(dateTime);
+            Console.WriteLine(_draggedShift.EndTime);
+            Console.WriteLine(_draggedShift.StartTime);
+            Console.WriteLine(_draggedShift.ShiftName);
+            Console.WriteLine(eventData.StartTime);
+            Console.WriteLine(eventData.EndTime);
+
             CalendarEventList.Add(eventData);
 
-            await ScheduleRef.RefreshEventsAsync();
+            //await ScheduleRef.RefreshEventsAsync();
         }
 
         private DateTime GenerateEventDatetime(DateTime datetime1, string time)

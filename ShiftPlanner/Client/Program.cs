@@ -22,7 +22,7 @@ builder.Services.AddScoped<IShiftService, ShiftService>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 
 SyncfusionLicenseProvider.RegisterLicense("NTI1MjA1QDMxMzkyZTMzMmUzMFZnNDg2ajMzNllwSHVpWUNDTXhWTndzZ3U4OGJtazhVN0JpbXN5OUkvMk09");
-builder.Services.AddSyncfusionBlazor();
+builder.Services.AddSyncfusionBlazor(options => { options.IgnoreScriptIsolation = true; });
 
 
 await builder.Build().RunAsync();

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.ResponseCompression;
+using ShiftPlanner.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 builder.Services.AddRazorPages();
+
+builder.Services.AddSingleton<IShiftService, ShiftService>();
 
 var app = builder.Build();
 

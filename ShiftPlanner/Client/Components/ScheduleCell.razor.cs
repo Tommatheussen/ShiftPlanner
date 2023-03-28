@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using ShiftPlanner.Shared;
 using Syncfusion.Blazor.Schedule;
 
 namespace ShiftPlanner.Client.Components
