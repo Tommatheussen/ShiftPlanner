@@ -1,58 +1,4 @@
 ﻿@page "/"
-
-<!--
-@using Syncfusion.Blazor.Schedule
-
-
-<PageTitle>Index</PageTitle>
-
-<div class="calendar-page">
-    <div class="calendar-column">
-        <SfSchedule @ref="ScheduleRef" TValue="CalendarEvent" Readonly="true" Width="100%" Height="100%">-->
-@*<ScheduleEvent s TValue="ScheduleData.AppointmentData" EventRendered="OnEventRendered"></ScheduleEvents>*@
-<!--<ScheduleViews>
-                <ScheduleView MaxEventsPerRow="1" Option="View.Month">
-                    <EventTemplate>
-                        <ScheduleEvent Event="@(context as CalendarEvent)" />
-                    </EventTemplate>
-                </ScheduleView>
-            </ScheduleViews>
-            <ScheduleEventSettings DataSource="@CalendarEventList">
-                <ScheduleField Id="Id">
-                    <FieldSubject Name="ShiftName"></FieldSubject>
-                    <FieldIsAllDay Name="FullDay"></FieldIsAllDay>
-                    <FieldStartTime Name="StartTime"></FieldStartTime>
-                    <FieldEndTime Name="EndTime"></FieldEndTime>
-                </ScheduleField>
-            </ScheduleEventSettings>
-            <ScheduleTemplates>
-                <CellTemplate>
-                    <ScheduleCell Context="@context" ShiftDropped="HandleShiftDropped" />
-                </CellTemplate>
-            </ScheduleTemplates>
-        </SfSchedule>
-    </div>
-
-    @if (ShiftList != null)
-    {
-        <div class="treeview-column">
-            @foreach (var shift in ShiftList)
-            {
-                <div draggable="true" class="shift-block" @ondragstart="() => HandleDragStart(shift)">
-                    <div class="shift-header">@shift.ShiftName</div>
-                    <div class="shift-times">@shift.FullTimeSlot</div>
-                </div>
-            }
-        </div>
-    }
-</div>-->
-@*<div class="row">*@
-
-<!-- Calendar -->
-@*<div class="col-sm-12 col-md-12 col-lg-12">*@
-@*<MudBlazor.MudContainer Fixed="true">*@
-
-
 <MudAppBar Fixed="false">
     <MudButton StartIcon="@Icons.Material.Filled.Settings" OnClick="@NavigateToConfigurePage" Color="Color.Inherit">Instellingen</MudButton>
     <MudSpacer />
@@ -61,17 +7,4 @@
     <MudButton StartIcon="@Icons.Material.Filled.Save" OnClick="@TriggerShiftSave" Color="Color.Inherit">Opslaan</MudButton>
 </MudAppBar>
 
-<Calendar @ref="calendar">
-
-</Calendar>
-
-
-@*</MudBlazor.MudContainer>*@
-@*</div>*@
-<!-- Day Menu -->
-@*<div class="col-sm-12 col-md-12 col-lg-3">*@
-@*<AddEvent SelectedDay="@selectedDay" OnEventAdded="(e) => selectedDay.Events.Add(e)" />*@
-
-@*<EventsList SelectedDay="@selectedDay" />*@
-@*</div>*@
-@*</div>*@
+<Calendar @ref="calendar"></Calendar>

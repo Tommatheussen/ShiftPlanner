@@ -17,9 +17,14 @@ namespace ShiftPlanner.Client.Components
         [Inject]
         private IShiftService _shiftService { get; set; } = default!;
 
+        [Inject]
+        private IAppStateService _appStateService { get; set; } = default!;
+
         private async Task SaveShift()
         {
-            if(shiftDefinition.ShiftId == Guid.Empty)
+            _appStateService.SetOverlayState(true);
+
+            if (shiftDefinition.ShiftId == Guid.Empty)
             {
                 await _shiftService.CreateNewShift(new NewShift()
                 {
@@ -33,6 +38,9 @@ namespace ShiftPlanner.Client.Components
             {
                 await _shiftService.UpdateShift(shiftDefinition);
             }
+
+            _appStateService.SetOverlayState(false);
+
             MudDialog.Close();
         }
 

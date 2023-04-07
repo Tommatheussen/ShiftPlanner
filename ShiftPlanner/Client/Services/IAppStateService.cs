@@ -10,5 +10,8 @@ namespace ShiftPlanner.Client.Services
 
         event Action<DateOnly>? OnPopupChange;
         void NotifyDateOpenedChanged(DateOnly date);
+
+        event Action<bool>? OnOverlayChange;
+        void SetOverlayState(bool state);
     }
 }

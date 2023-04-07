@@ -10,17 +10,23 @@ namespace ShiftPlanner.Client.Components
         [Inject]
         private IShiftService _shiftService { get; set; } = default!;
 
+        [Inject]
+        private IAppStateService _appStateService { get; set; } = default!;
+
         [Parameter]
         public EventCallback<ShiftDefinition?> ShiftSelected { get; set; }
 
-
         private IEnumerable<ShiftDefinition> Shifts { get; set; } = new List<ShiftDefinition>();
-
 
         protected async override Task OnInitializedAsync()
         {
+            _appStateService.SetOverlayState(true);
+
             Shifts = await _shiftService.GetShifts();
+
             await base.OnInitializedAsync();
+
+            _appStateService.SetOverlayState(false);
         }
 
         public IEnumerable<ShiftDefinition> EarlyShifts

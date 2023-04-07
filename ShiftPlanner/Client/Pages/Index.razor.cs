@@ -15,6 +15,9 @@ namespace ShiftPlanner.Client.Pages
         [Inject]
         private NavigationManager _navigationManager { get; set; } = default!;
 
+        [Inject]
+        private IAppStateService _appStateService { get; set; } = default!;
+
         public Calendar calendar;
 
         public void TriggerShiftSave()

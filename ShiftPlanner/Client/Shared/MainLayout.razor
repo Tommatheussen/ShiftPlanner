@@ -3,3 +3,11 @@
 <MudThemeProvider />
 
 @Body
+
+
+<MudOverlay Visible="IsOverlayVisible" LightBackground="true" ZIndex="9999">
+    <MudProgressCircular Color="Color.Default" Style="height:100px;width:100px;" Indeterminate="true" />
+    <MudText Typo="Typo.subtitle1" Color="Color.Default">
+        <b>Aan het laden...</b>
+    </MudText>
+</MudOverlay>

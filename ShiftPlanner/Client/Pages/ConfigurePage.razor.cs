@@ -13,6 +13,9 @@ namespace ShiftPlanner.Client.Pages
         private IShiftService _shiftService { get; set; } = default!;
 
         [Inject]
+        private IAppStateService _appStateService { get; set; } = default!;
+
+        [Inject]
         private NavigationManager _navigationManager { get; set; } = default!;
 
         [Inject]
@@ -22,7 +25,11 @@ namespace ShiftPlanner.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            _appStateService.SetOverlayState(true);
+
             ShiftList = await _shiftService.GetShifts();
+
+            _appStateService.SetOverlayState(false);
         }
 
         private void NavigateToMainPage()
@@ -55,24 +62,31 @@ namespace ShiftPlanner.Client.Pages
 
             if (!result.Canceled)
             {
+                _appStateService.SetOverlayState(true);
+
                 ShiftList = await _shiftService.RenewCachedShiftList();
+                _appStateService.SetOverlayState(false);
             }
         }
 
         private async Task ConfirmShiftDelete(ShiftDefinition shift)
         {
             bool? deleteResult = await _dialogService.ShowMessageBox(
-                "Shift verwijderen",
-                $"Ben je zeker dat je de shift <b>{shift.ShiftName}</b> wil verwijderen?",
+                "Shift verwijderen?",
+                new MarkupString($"Ben je zeker dat je de shift <b>{shift.ShiftName}</b> wil verwijderen?"),
                 yesText: "Ja",
                 cancelText: "Nee"
                 );
 
             if (deleteResult.HasValue && deleteResult.Value)
             {
+                _appStateService.SetOverlayState(true);
+
                 await _shiftService.DeleteShift(shift);
 
                 ShiftList = await _shiftService.RenewCachedShiftList();
+
+                _appStateService.SetOverlayState(false);
             }
         }
     }

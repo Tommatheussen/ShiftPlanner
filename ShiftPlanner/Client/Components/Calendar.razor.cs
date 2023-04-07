@@ -42,11 +42,14 @@ namespace ShiftPlanner.Client.Components
         private async void currentDateHasChanged()
         {
             UpdateCalendar();
+
             await UpdateEvents();
         }
 
         async Task UpdateEvents()
         {
+            _appStateService.SetOverlayState(true);
+
             var events = await _eventService.GetEventsForMonth(_appStateService.SelectedDate.Month, _appStateService.SelectedDate.Year);
             var shifts = await _shiftService.GetShifts();
 
@@ -62,6 +65,8 @@ namespace ShiftPlanner.Client.Components
             }
 
             StateHasChanged();
+
+            _appStateService.SetOverlayState(false);
         }
 
         void UpdateCalendar()
@@ -112,6 +117,8 @@ namespace ShiftPlanner.Client.Components
 
         public async void SaveEvents()
         {
+            _appStateService.SetOverlayState(true);
+
             var eventList = new List<CalendarEvent>();
             foreach (var day in days)
             {
@@ -130,6 +137,8 @@ namespace ShiftPlanner.Client.Components
 
             DateOnly currentMonth = _appStateService.SelectedDate;
             await _eventService.UpdateEventsForEvents(currentMonth.Month, currentMonth.Year, eventList);
+
+            _appStateService.SetOverlayState(false);
         }
     }
 }

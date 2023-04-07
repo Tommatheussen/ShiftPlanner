@@ -23,5 +23,9 @@ namespace ShiftPlanner.Client.Services
 
         public event Action<DateOnly>? OnPopupChange;
         public void NotifyDateOpenedChanged(DateOnly date) => OnPopupChange?.Invoke(date);
+
+
+        public event Action<bool>? OnOverlayChange;
+        public void SetOverlayState(bool state) =>OnOverlayChange?.Invoke(state);
     }
 }
