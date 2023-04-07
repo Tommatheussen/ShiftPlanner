@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftPlanner.Client", "Shif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftPlanner.Shared", "ShiftPlanner\Shared\ShiftPlanner.Shared.csproj", "{2B8F8FC2-FAF1-49BD-98B3-D78271E4F2F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingDemo", "LoadingDemo\LoadingDemo.csproj", "{C148BE95-EFAE-4588-94CA-472B8D8B1B25}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingDemoPWA", "LoadingDemoPWA\LoadingDemoPWA.csproj", "{61D9728D-33F4-4A5A-A280-EFB830D59379}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

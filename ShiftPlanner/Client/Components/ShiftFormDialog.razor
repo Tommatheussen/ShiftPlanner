@@ -1,10 +1,4 @@
 ﻿<MudDialog Style="min-height:450px">
-    @*<TitleContent>
-        <MudText Typo="Typo.h6">
-            <MudIcon Icon="@Icons.Material.Filled.EditNote" Class="" />
-            Shift aanpassen
-        </MudText>
-    </TitleContent>*@
     <DialogContent>
         <MudTextField Class="ma-1" Variant="Variant.Filled" @bind-Value="@shiftDefinition.ShiftName" Label="Shift naam" />
         <MudTimePicker Class="ma-1" Variant="Variant.Filled" PickerVariant="PickerVariant.Dialog" Label="Begin" @bind-Time="StartTime" />
