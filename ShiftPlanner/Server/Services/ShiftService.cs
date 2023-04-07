@@ -14,9 +14,11 @@ namespace ShiftPlanner.Server.Services
                 var shifts = await db.Shifts
                     .Select(shift => new ShiftDefinition
                     {
+                        ShiftId = shift.Id,
                         ShiftName = shift.ShiftName,
                         StartTime = shift.StartTime,
-                        EndTime = shift.EndTime
+                        EndTime = shift.EndTime,
+                        ShiftType = shift.ShiftType
                     }).ToListAsync();
 
                 return shifts;

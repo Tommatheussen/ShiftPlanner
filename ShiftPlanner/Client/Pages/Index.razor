@@ -1,5 +1,6 @@
 ﻿@page "/"
 
+<!--
 @using Syncfusion.Blazor.Schedule
 
 
@@ -7,9 +8,9 @@
 
 <div class="calendar-page">
     <div class="calendar-column">
-        <SfSchedule @ref="ScheduleRef" TValue="CalendarEvent" Readonly="true" Width="100%" Height="100%">
-            @*<ScheduleEvent s TValue="ScheduleData.AppointmentData" EventRendered="OnEventRendered"></ScheduleEvents>*@
-            <ScheduleViews>
+        <SfSchedule @ref="ScheduleRef" TValue="CalendarEvent" Readonly="true" Width="100%" Height="100%">-->
+@*<ScheduleEvent s TValue="ScheduleData.AppointmentData" EventRendered="OnEventRendered"></ScheduleEvents>*@
+<!--<ScheduleViews>
                 <ScheduleView MaxEventsPerRow="1" Option="View.Month">
                     <EventTemplate>
                         <ScheduleEvent Event="@(context as CalendarEvent)" />
@@ -44,4 +45,33 @@
             }
         </div>
     }
-</div>
+</div>-->
+@*<div class="row">*@
+
+<!-- Calendar -->
+@*<div class="col-sm-12 col-md-12 col-lg-12">*@
+@*<MudBlazor.MudContainer Fixed="true">*@
+
+
+<MudAppBar Fixed="false">
+    <MudButton StartIcon="@Icons.Material.Filled.Settings" OnClick="@NavigateToConfigurePage" Color="Color.Inherit">Instellingen</MudButton>
+    <MudSpacer />
+    <MonthSelector />
+    <MudSpacer />
+    <MudButton StartIcon="@Icons.Material.Filled.Save" OnClick="@TriggerShiftSave" Color="Color.Inherit">Opslaan</MudButton>
+</MudAppBar>
+
+<Calendar @ref="calendar">
+
+</Calendar>
+
+
+@*</MudBlazor.MudContainer>*@
+@*</div>*@
+<!-- Day Menu -->
+@*<div class="col-sm-12 col-md-12 col-lg-3">*@
+@*<AddEvent SelectedDay="@selectedDay" OnEventAdded="(e) => selectedDay.Events.Add(e)" />*@
+
+@*<EventsList SelectedDay="@selectedDay" />*@
+@*</div>*@
+@*</div>*@

@@ -1,0 +1,14 @@
+﻿<div class="calendar">
+    <MudText Typo="Typo.h6" Align="Align.Center">Maandag</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">Dinsdag</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">Woensdag</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">Donderdag</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">Vrijdag</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">Zaterdag</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">Zondag</MudText>
+
+    @foreach (var item in days)
+    {
+        <DayTemplate Day="item"></DayTemplate>
+    }
+</div>

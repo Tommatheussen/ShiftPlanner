@@ -1,0 +1,32 @@
+﻿ .day-cell {
+    display: grid;
+    grid-template-rows: 1fr 0px;
+}
+
+
+ .day-cell   .day {
+        display: grid;
+        grid-template:
+            "daynumber divider shiftname"
+            "daynumber divider shiftslot";
+    }
+
+    .day .daynumber {
+        grid-area: daynumber;
+    }
+
+    .day .divider {
+        grid-area: divider;
+    }
+
+    .day .shiftname {
+        grid-area: shiftname;
+    }
+
+    .day .shiftslot {
+        grid-area: shiftslot
+    }
+
+.day-cell .day .day-shift {
+    justify-content: center;
+}

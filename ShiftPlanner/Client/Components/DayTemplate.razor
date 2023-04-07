@@ -1,0 +1,21 @@
+﻿<div class="day-cell">
+    @if (!Day.IsEmpty)
+    {
+        <MudPaper Elevation="3" @onclick="@ToggleOpen" Class="day">
+
+            <MudText Class="daynumber pa-2" Align="Align.Center" Typo="Typo.h4">@Day.DayNumber</MudText>
+
+            <MudDivider Class="divider" Vertical="true" />
+
+            @if (Day.ExistingShift != null)
+            {
+                <MudText Class="pt-2 shiftname" Align="Align.Center" Typo="Typo.h6">@Day.ExistingShift.ShiftName</MudText>
+                <MudText Class="shiftslot" Align="Align.Center" Typo="Typo.body1">@Day.ExistingShift.FullTimeSlot</MudText>
+            }
+
+        </MudPaper>
+        <MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+            <ShiftSelectionPopup ShiftSelected="@ShiftSelected" />
+        </MudPopover>
+    }
+</div>

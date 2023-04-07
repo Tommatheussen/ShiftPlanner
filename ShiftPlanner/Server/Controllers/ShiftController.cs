@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 using Microsoft.AspNetCore.Mvc;
 using ShiftPlanner.Server.Models;
 using ShiftPlanner.Server.Services;
@@ -24,20 +31,23 @@ namespace ShiftPlanner.Server.Controllers
         public async Task<IEnumerable<ShiftDefinition>> GetShifts()
         {
             var list = await _shiftService.GetShifts();
+
             return list;
         }
 
         [HttpPost]
-        public async Task CreateNewShift([FromBody] Shift shift)
+        public async Task CreateNewShift([FromBody] NewShift shift)
         {
-            await _shiftService.CreateNewShift(shift);
+            await _shiftService.CreateNewShift(new Shift(shift));
+
             return;
         }
 
         [HttpPut]
-        public async Task UpdateExistingShift([FromBody] Shift shift)
+        public async Task UpdateExistingShift([FromBody] ShiftDefinition shiftDefinition)
         {
-            await _shiftService.UpdateExistingShift(shift);
+            await _shiftService.UpdateExistingShift(new Shift(shiftDefinition));
+
             return;
         }
     }

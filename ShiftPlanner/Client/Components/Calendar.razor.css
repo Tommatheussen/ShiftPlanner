@@ -1,0 +1,11 @@
+﻿.calendar {
+    height: calc(100svh - 64px);
+    width: 100vw;
+    padding: 16px;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    grid-auto-rows: 1fr;
+    grid-gap: 12px;
+}

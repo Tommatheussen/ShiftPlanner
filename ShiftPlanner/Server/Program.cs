@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 
 builder.Services.AddSingleton<IShiftService, ShiftService>();
+builder.Services.AddSingleton<IGoogleService, GoogleService>();
 
 var app = builder.Build();
 

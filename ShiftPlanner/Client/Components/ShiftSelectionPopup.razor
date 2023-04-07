@@ -1,0 +1,26 @@
+﻿<MudStack Row="true" Class="pa-2">
+    <MudStack>
+        @foreach (var shift in EarlyShifts)
+        {
+            <ShiftTemplate Shift="shift" ShiftSelected="@ShiftSelected"></ShiftTemplate>
+        }
+    </MudStack>
+
+    <MudStack>
+        @foreach (var shift in LateShifts)
+        {
+            <ShiftTemplate Shift="shift" ShiftSelected="@ShiftSelected"></ShiftTemplate>
+        }
+    </MudStack>
+
+    <MudStack>
+        @foreach (var shift in OtherShifts)
+        {
+            <ShiftTemplate Shift="shift" ShiftSelected="@ShiftSelected"></ShiftTemplate>
+        }
+        <MudPaper Class="pa-2">
+            <MudText Typo="Typo.subtitle2" Align="Align.Center">Niets</MudText>
+            <MudText></MudText>
+        </MudPaper>
+    </MudStack>
+</MudStack>

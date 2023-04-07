@@ -1,2 +1,21 @@
 ﻿@page "/configure"
 
+<MudAppBar Fixed="false">
+    <MudButton StartIcon="@Icons.Material.Filled.ArrowBack" OnClick="@NavigateToMainPage" Color="Color.Inherit">Terug</MudButton>
+    <MudSpacer />
+    <MudButton StartIcon="@Icons.Material.Filled.PostAdd" OnClick="@AddNewShift" Color="Color.Inherit">Nieuw</MudButton>
+</MudAppBar>
+
+<button onclick="@CreateNewShift">Create</button>
+
+@foreach (var shift in ShiftList)
+{
+    <ShiftTemplate ShiftSelected="@OpenShiftUpdateDialog" Shift="shift"></ShiftTemplate>
+}
+
+
+<MudDialogProvider
+    CloseButton="true"
+    Position="DialogPosition.Center"
+    CloseOnEscapeKey="true"
+                   />
