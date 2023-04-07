@@ -15,26 +15,51 @@ namespace ShiftPlanner.Client.Components
         [Parameter]
         public IEnumerable<ShiftDefinition> Shifts { get; set; } = default!;
 
-        public string DayName
-        {
-            get => CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(Day.Date.DayOfWeek);
-        }
-        
-        
+        [Inject]
+        private IAppStateService _appStateService { get; set; } = default!;
+
         public void ShiftSelected(ShiftDefinition? shift)
         {
             Day.ExistingShift = shift;
-            this._isOpen = false;
+            IsPopoverOpen = false;
         }
 
-        public bool _isOpen;
+        protected override void OnInitialized()
+        {
+            _appStateService.OnPopupChange += PopupDateChanged;
+
+            base.OnInitialized();
+        }
+
+        public void OnDispose()
+        {
+            _appStateService.OnPopupChange -= PopupDateChanged;
+        }
+
+        public void PopupDateChanged(DateOnly date)
+        {
+            if (IsPopoverOpen && Day.Date != date)
+            {
+                IsPopoverOpen = false;
+                StateHasChanged();
+            }
+        }
+
+        private bool _isPopoverOpen;
+        public bool IsPopoverOpen
+        {
+            get => _isPopoverOpen;
+            set => _isPopoverOpen = value;
+        }
 
         public void ToggleOpen()
         {
-            if (_isOpen)
-                _isOpen = false;
-            else
-                _isOpen = true;
+            IsPopoverOpen = !IsPopoverOpen;
+
+            if (IsPopoverOpen)
+            {
+                _appStateService.NotifyDateOpenedChanged(Day.Date);
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ShiftPlanner.Client.Components
 
         protected override void OnInitialized()
         {
-            _appStateService.OnChange += _updateVisibleDate;
+            _appStateService.OnDateChange += _updateVisibleDate;
             _updateVisibleDate();
 
             base.OnInitialized();
@@ -29,7 +29,7 @@ namespace ShiftPlanner.Client.Components
 
         public void Dispose()
         {
-            _appStateService.OnChange -= StateHasChanged;
+            _appStateService.OnDateChange -= StateHasChanged;
         }
 
         private void PreviousMonthClicked()

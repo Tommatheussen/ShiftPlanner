@@ -3,7 +3,8 @@ namespace ShiftPlanner.Client.Services
 {
     public class AppStateService : IAppStateService
     {
-        public event Action? OnChange;
+        // Selected date
+        public event Action? OnDateChange;
 
         private DateOnly selectedDate = DateOnly.FromDateTime(DateTime.Now);
         public DateOnly SelectedDate
@@ -12,10 +13,15 @@ namespace ShiftPlanner.Client.Services
             set
             {
                 selectedDate = value;
-                NotifyStateChanged();
+                NotifyDateStateChanged();
             }
         }
 
-        private void NotifyStateChanged() => OnChange?.Invoke();
+        private void NotifyDateStateChanged() => OnDateChange?.Invoke();
+
+        // Opened date popup
+
+        public event Action<DateOnly>? OnPopupChange;
+        public void NotifyDateOpenedChanged(DateOnly date) => OnPopupChange?.Invoke(date);
     }
 }

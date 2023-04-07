@@ -31,12 +31,12 @@ namespace ShiftPlanner.Client.Components
         {
             UpdateCalendar();
 
-            _appStateService.OnChange += currentDateHasChanged;
+            _appStateService.OnDateChange += currentDateHasChanged;
         }
 
         public void OnDispose()
         {
-            _appStateService.OnChange -= currentDateHasChanged;
+            _appStateService.OnDateChange -= currentDateHasChanged;
         }
 
         private async void currentDateHasChanged()

@@ -3,8 +3,12 @@ namespace ShiftPlanner.Client.Services
 {
     public interface IAppStateService
     {
-        event Action? OnChange;
+        event Action? OnDateChange;
 
         DateOnly SelectedDate { get; set; }
+
+
+        event Action<DateOnly>? OnPopupChange;
+        void NotifyDateOpenedChanged(DateOnly date);
     }
 }
