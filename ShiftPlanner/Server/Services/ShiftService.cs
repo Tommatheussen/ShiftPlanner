@@ -7,6 +7,14 @@ namespace ShiftPlanner.Server.Services
 {
     public class ShiftService : IShiftService
     {
+        public ShiftService()
+        {
+            using (var db = new ShiftPlannerContext())
+            {
+                db.Database.EnsureCreated();
+            }
+        }
+
         public async Task<IEnumerable<ShiftDefinition>> GetShifts()
         {
             using (var db = new ShiftPlannerContext())

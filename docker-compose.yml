@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  shiftplanner.server:
+    image: ${DOCKER_REGISTRY-}shiftplanner
+    build:
+      context: .
+      dockerfile: ShiftPlanner/Server/Dockerfile
+    volumes:
+      - ./storage:/app/data/
+      

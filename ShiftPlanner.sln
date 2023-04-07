@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftPlanner.Client", "Shif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShiftPlanner.Shared", "ShiftPlanner\Shared\ShiftPlanner.Shared.csproj", "{2B8F8FC2-FAF1-49BD-98B3-D78271E4F2F4}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A80BE803-EB26-4FBD-A8F3-3BDED7DDC09D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{61D9728D-33F4-4A5A-A280-EFB830D59379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61D9728D-33F4-4A5A-A280-EFB830D59379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61D9728D-33F4-4A5A-A280-EFB830D59379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80BE803-EB26-4FBD-A8F3-3BDED7DDC09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80BE803-EB26-4FBD-A8F3-3BDED7DDC09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80BE803-EB26-4FBD-A8F3-3BDED7DDC09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80BE803-EB26-4FBD-A8F3-3BDED7DDC09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace ShiftPlanner.Server.Models
 
         public ShiftPlannerContext()
         {
-            DbPath = $"./shiftplanner.db";
+            DbPath = $"./data/shiftplanner.db";
         }
 
         // The following configures EF to create a Sqlite database file in the
