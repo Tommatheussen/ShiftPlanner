@@ -9,6 +9,7 @@ namespace ShiftPlanner.Server.Services
         Task<IEnumerable<ShiftDefinition>> GetShifts();
         Task CreateNewShift(Shift shift);
         Task UpdateExistingShift(Shift shift);
+        Task DeleteShift(Guid id);
     }
 }
 

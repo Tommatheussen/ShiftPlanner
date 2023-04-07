@@ -42,5 +42,17 @@ namespace ShiftPlanner.Server.Services
                 await db.SaveChangesAsync();
             }
         }
+
+        public async Task DeleteShift(Guid id)
+        {
+            using (var db = new ShiftPlannerContext())
+            {
+                db.Remove(new Shift()
+                {
+                    Id = id
+                });
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

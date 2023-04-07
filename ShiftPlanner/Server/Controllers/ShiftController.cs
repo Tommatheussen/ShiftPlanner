@@ -50,6 +50,12 @@ namespace ShiftPlanner.Server.Controllers
 
             return;
         }
+
+        [HttpDelete("{id:Guid}")]
+        public async Task DeleteShift(Guid id)
+        {
+            await _shiftService.DeleteShift(id);
+        }
     }
 }
 
