@@ -8,7 +8,8 @@ namespace ShiftPlanner.Client.Components
 {
     public partial class ShiftFormDialog : ComponentBase
     {
-        [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+        [CascadingParameter]
+        MudDialogInstance MudDialog { get; set; }
 
         [Parameter]
         public ShiftDefinition shiftDefinition { get; set; } = new ShiftDefinition();
@@ -31,9 +32,7 @@ namespace ShiftPlanner.Client.Components
             else
             {
                 await shiftService.UpdateShift(shiftDefinition);
-
             }
-            //Snackbar.Add("Server Deleted", Severity.Success);
             MudDialog.Close();
         }
 
@@ -45,6 +44,17 @@ namespace ShiftPlanner.Client.Components
             base.OnInitialized();
         }
 
+        public string shiftTypeName(ShiftType type)
+        {
+            return type switch
+            {
+                ShiftType.Early => "Vroege",
+                ShiftType.Late => "Late",
+                ShiftType.Other => "Andere",
+                _ => string.Empty
+            };
+        }
+
         private TimeSpan? startTime;
         public TimeSpan? StartTime
         {
@@ -52,13 +62,9 @@ namespace ShiftPlanner.Client.Components
             set
             {
                 startTime = value;
-
-                Console.WriteLine("Updating starttime");
                 shiftDefinition.StartTime = TimeOnly.FromTimeSpan(startTime!.Value);
             }
         }
-
-
 
         private TimeSpan? endTime;
         public TimeSpan? EndTime
@@ -67,13 +73,8 @@ namespace ShiftPlanner.Client.Components
             set
             {
                 endTime = value;
-                Console.WriteLine("Updating endtime");
-
                 shiftDefinition.EndTime = TimeOnly.FromTimeSpan(endTime!.Value);
             }
         }
-
-        //private 
     }
 }
-

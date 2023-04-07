@@ -1,8 +1,14 @@
-﻿<MudDialog Style="min-height:450px">
+﻿<MudDialog Class="dialog" Style="min-height:450px">
     <DialogContent>
-        <MudTextField Class="ma-1" Variant="Variant.Filled" @bind-Value="@shiftDefinition.ShiftName" Label="Shift naam" />
-        <MudTimePicker Class="ma-1" Variant="Variant.Filled" PickerVariant="PickerVariant.Dialog" Label="Begin" @bind-Time="StartTime" />
-        <MudTimePicker Class="ma-1" Variant="Variant.Filled" PickerVariant="PickerVariant.Dialog" Label="Eind" @bind-Time="EndTime" />
+        <MudTextField Class="ma-1 py-1" Variant="Variant.Filled" @bind-Value="shiftDefinition.ShiftName" Label="Shift naam" />
+        <MudTimePicker Class="ma-1 py-1" Variant="Variant.Filled" PickerVariant="PickerVariant.Dialog" Label="Begin" @bind-Time="StartTime" />
+        <MudTimePicker Class="ma-1 py-1" Variant="Variant.Filled" PickerVariant="PickerVariant.Dialog" Label="Einde" @bind-Time="EndTime" />
+        <MudSelect Class="ma-1 py-1" Variant="Variant.Filled" @bind-Value="shiftDefinition.ShiftType" Label="Type" AnchorOrigin="Origin.BottomCenter">
+            @foreach (ShiftType type in Enum.GetValues(typeof(ShiftType)))
+                {
+                <MudSelectItem Value="@type">@shiftTypeName(type)</MudSelectItem>
+                }
+        </MudSelect>
     </DialogContent>
     <DialogActions>
         <MudSpacer />
