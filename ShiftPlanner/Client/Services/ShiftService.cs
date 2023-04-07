@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Net.Http.Json;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Calendar.v3;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
 using ShiftPlanner.Shared;
 
 namespace ShiftPlanner.Client.Services

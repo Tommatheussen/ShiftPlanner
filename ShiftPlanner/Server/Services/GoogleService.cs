@@ -17,19 +17,19 @@ namespace ShiftPlanner.Server.Services
 
         public GoogleService()
         {
-            credential = GoogleCredential.FromFile("shiftplanner-382814-8a893f652d6e.json")
+            credential = GoogleCredential.FromFile(Constants.GoogleAPIKeysFile)
                 .CreateScoped(new[] { CalendarService.Scope.Calendar });
 
             calendarService = new CalendarService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = "Books API Sample"
+                ApplicationName = Constants.GoogleApplicationName
             });
         }
 
         public async Task<IEnumerable<ExistingCalendarEvent>> GetEventsForMonth(int month, int year)
         {
-            var calendarRequest = calendarService.Events.List("18bb572e660eeb33bbddb0f0a6addef4c8b6e2548607f41428b8f50bde74b36d@group.calendar.google.com");
+            var calendarRequest = calendarService.Events.List(Constants.CalendarId);
 
             DateTime minTime = new DateTime(year, month, 1);
 
@@ -63,8 +63,10 @@ namespace ShiftPlanner.Server.Services
                 // The event was deleted
                 if (newEvent == null)
                 {
-                    request.Queue<string>(calendarService.Events.Delete("18bb572e660eeb33bbddb0f0a6addef4c8b6e2548607f41428b8f50bde74b36d@group.calendar.google.com", oldEvent.Id),
-                        (content, error, i, message) => { });
+                    request.Queue<string>(calendarService.Events.Delete(Constants.CalendarId, oldEvent.Id),
+                        (content, error, i, message) => {
+                          Console.WriteLine(message);
+                        });
                 }
                 else if (newEvent.ShiftId != oldEvent.ShiftId)
                 {
@@ -82,9 +84,11 @@ namespace ShiftPlanner.Server.Services
                         },
                         Description = newEvent.ShiftId.ToString()
                     },
-                    "18bb572e660eeb33bbddb0f0a6addef4c8b6e2548607f41428b8f50bde74b36d@group.calendar.google.com", oldEvent.Id
+                    Constants.CalendarId, oldEvent.Id
                     ),
-                      (content, error, i, message) => { });
+                      (content, error, i, message) => {
+                          Console.WriteLine(message);
+                      });
                 }
             }
 
@@ -107,9 +111,12 @@ namespace ShiftPlanner.Server.Services
                     },
                     Description = newEvent.ShiftId.ToString()
                 },
-                    "18bb572e660eeb33bbddb0f0a6addef4c8b6e2548607f41428b8f50bde74b36d@group.calendar.google.com"
+                    Constants.CalendarId
                 ),
-                      (content, error, i, message) => { });
+                      (content, error, i, message) => {
+                          Console.WriteLine(error?.Message);
+                          Console.WriteLine(message);
+                          });
             }
 
             await request.ExecuteAsync();
