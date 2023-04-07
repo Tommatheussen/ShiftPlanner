@@ -17,7 +17,7 @@ namespace ShiftPlanner.Shared
         [Required]
         public TimeOnly EndTime { get; set; }
 
-        public string FullTimeSlot => $"{StartTime} - {EndTime}";
+        public string FullTimeSlot => $"{StartTime:HH:mm} - {EndTime:HH:mm}";
 
         [Required]
         public ShiftType ShiftType { get; set; }

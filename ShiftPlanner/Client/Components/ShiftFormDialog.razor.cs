@@ -15,13 +15,13 @@ namespace ShiftPlanner.Client.Components
         public ShiftDefinition shiftDefinition { get; set; } = new ShiftDefinition();
 
         [Inject]
-        private IShiftService shiftService { get; set; } = default!;
+        private IShiftService _shiftService { get; set; } = default!;
 
         private async Task SaveShift()
         {
             if(shiftDefinition.ShiftId == Guid.Empty)
             {
-                await shiftService.CreateNewShift(new NewShift()
+                await _shiftService.CreateNewShift(new NewShift()
                 {
                     ShiftName = shiftDefinition.ShiftName,
                     StartTime = shiftDefinition.StartTime,
@@ -31,7 +31,7 @@ namespace ShiftPlanner.Client.Components
             }
             else
             {
-                await shiftService.UpdateShift(shiftDefinition);
+                await _shiftService.UpdateShift(shiftDefinition);
             }
             MudDialog.Close();
         }

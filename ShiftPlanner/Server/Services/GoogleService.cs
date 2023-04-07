@@ -63,14 +63,13 @@ namespace ShiftPlanner.Server.Services
                 // The event was deleted
                 if (newEvent == null)
                 {
-                    request.Queue<string>(calendarService.Events.Delete(Constants.CalendarId, oldEvent.Id),
-                        (content, error, i, message) => {
-                          Console.WriteLine(message);
-                        });
+                    request.Queue<string>(
+                        calendarService.Events.Delete(Constants.CalendarId, oldEvent.Id),
+                        (_, _, _, _) => { });
                 }
                 else if (newEvent.ShiftId != oldEvent.ShiftId)
                 {
-                    request.Queue<Event>(calendarService.Events.Update(new Event
+                    Event eventToUpdate = new Event
                     {
                         Id = oldEvent.Id,
                         Summary = newEvent.ShiftName,
@@ -83,12 +82,11 @@ namespace ShiftPlanner.Server.Services
                             DateTime = newEvent.Date.ToDateTime(newEvent.EndTime)
                         },
                         Description = newEvent.ShiftId.ToString()
-                    },
-                    Constants.CalendarId, oldEvent.Id
-                    ),
-                      (content, error, i, message) => {
-                          Console.WriteLine(message);
-                      });
+                    };
+
+                    request.Queue<Event>(
+                        calendarService.Events.Update(eventToUpdate, Constants.CalendarId, oldEvent.Id),
+                        (_, _, _, _) => { });
                 }
             }
 
@@ -98,7 +96,7 @@ namespace ShiftPlanner.Server.Services
 
                 if (hasOldEvent) continue;
 
-                request.Queue<Event>(calendarService.Events.Insert(new Event
+                Event newEventToInsert = new Event
                 {
                     Summary = newEvent.ShiftName,
                     Start = new EventDateTime()
@@ -110,13 +108,11 @@ namespace ShiftPlanner.Server.Services
                         DateTime = newEvent.Date.ToDateTime(newEvent.EndTime)
                     },
                     Description = newEvent.ShiftId.ToString()
-                },
-                    Constants.CalendarId
-                ),
-                      (content, error, i, message) => {
-                          Console.WriteLine(error?.Message);
-                          Console.WriteLine(message);
-                          });
+                };
+
+                request.Queue<Event>(
+                    calendarService.Events.Insert(newEventToInsert, Constants.CalendarId),
+                    (_, _, _, _) => { });
             }
 
             await request.ExecuteAsync();

@@ -8,14 +8,14 @@ namespace ShiftPlanner.Client.Components
     public partial class MonthSelector : ComponentBase
     {
         [Inject]
-        private IAppStateService appStateService { get; set; } = default!;
+        private IAppStateService _appStateService { get; set; } = default!;
 
         private int CurrentYear;
         private string CurrentMonth;
 
         protected override void OnInitialized()
         {
-            appStateService.OnChange += _updateVisibleDate;
+            _appStateService.OnChange += _updateVisibleDate;
             _updateVisibleDate();
 
             base.OnInitialized();
@@ -23,13 +23,13 @@ namespace ShiftPlanner.Client.Components
 
         private void _updateVisibleDate()
         {
-            CurrentYear = appStateService.SelectedDate.Year;
-            CurrentMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(appStateService.SelectedDate.Month);
+            CurrentYear = _appStateService.SelectedDate.Year;
+            CurrentMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(_appStateService.SelectedDate.Month);
         }
 
         public void Dispose()
         {
-            appStateService.OnChange -= StateHasChanged;
+            _appStateService.OnChange -= StateHasChanged;
         }
 
         private void PreviousMonthClicked()
@@ -44,8 +44,8 @@ namespace ShiftPlanner.Client.Components
 
         private void _adjustDateByMonth(int monthToAdd)
         {
-            DateOnly currentDate = appStateService.SelectedDate;
-            appStateService.SelectedDate = currentDate.AddMonths(monthToAdd);
+            DateOnly currentDate = _appStateService.SelectedDate;
+            _appStateService.SelectedDate = currentDate.AddMonths(monthToAdd);
         }
     }
 }

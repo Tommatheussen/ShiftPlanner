@@ -18,7 +18,8 @@
         {
             <ShiftTemplate Shift="shift" ShiftSelected="@ShiftSelected"></ShiftTemplate>
         }
-        <MudPaper Class="pa-2">
+
+        <MudPaper Style="display: grid" Class="pa-2" @onclick="@ClearSelectedShift">
             <MudText Typo="Typo.subtitle2" Align="Align.Center">Niets</MudText>
             <MudText></MudText>
         </MudPaper>

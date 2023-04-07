@@ -19,11 +19,5 @@ namespace ShiftPlanner.Shared
 
         [Required]
         public TimeOnly EndTime { get; set; }
-
-        //public bool FullDay => true;
-
-
-
-        public string FullTimeSlot => $"{StartTime:HH:mm} - {EndTime:HH:mm}";
     }
 }

@@ -10,13 +10,13 @@ namespace ShiftPlanner.Client.Components
     public partial class Calendar: ComponentBase
     {
         [Inject]
-        private IAppStateService appStateService { get; set; } = default!;
+        private IAppStateService _appStateService { get; set; } = default!;
 
         [Inject]
-        private IEventService eventService { get; set; } = default!;
+        private IEventService _eventService { get; set; } = default!;
 
         [Inject]
-        private IShiftService shiftService { get; set; } = default!;
+        private IShiftService _shiftService { get; set; } = default!;
 
         private List<CalendarDay> days = new List<CalendarDay>();
 
@@ -31,12 +31,12 @@ namespace ShiftPlanner.Client.Components
         {
             UpdateCalendar();
 
-            appStateService.OnChange += currentDateHasChanged;
+            _appStateService.OnChange += currentDateHasChanged;
         }
 
         public void OnDispose()
         {
-            appStateService.OnChange -= currentDateHasChanged;
+            _appStateService.OnChange -= currentDateHasChanged;
         }
 
         private async void currentDateHasChanged()
@@ -47,8 +47,8 @@ namespace ShiftPlanner.Client.Components
 
         async Task UpdateEvents()
         {
-            var events = await eventService.GetEventsForMonth(appStateService.SelectedDate.Month, appStateService.SelectedDate.Year);
-            var shifts = await shiftService.GetShifts();
+            var events = await _eventService.GetEventsForMonth(_appStateService.SelectedDate.Month, _appStateService.SelectedDate.Year);
+            var shifts = await _shiftService.GetShifts();
 
             foreach (var existingEvent in events)
             {
@@ -69,7 +69,7 @@ namespace ShiftPlanner.Client.Components
             days = new List<CalendarDay>();
 
             // Calculate the number of empty days
-            DateOnly currentMonth = appStateService.SelectedDate;
+            DateOnly currentMonth = _appStateService.SelectedDate;
 
             var firstDayDate = new DateTime(currentMonth.Year, currentMonth.Month, 1);
             DayOfWeek weekDayNumber = firstDayDate.DayOfWeek;
@@ -128,8 +128,8 @@ namespace ShiftPlanner.Client.Components
                 }
             }
 
-            DateOnly currentMonth = appStateService.SelectedDate;
-            await eventService.UpdateEventsForEvents(currentMonth.Month, currentMonth.Year, eventList);
+            DateOnly currentMonth = _appStateService.SelectedDate;
+            await _eventService.UpdateEventsForEvents(currentMonth.Month, currentMonth.Year, eventList);
         }
     }
 }

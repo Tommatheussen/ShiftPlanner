@@ -13,7 +13,7 @@ namespace ShiftPlanner.Client.Pages
         private IShiftService _shiftService { get; set; } = default!;
 
         [Inject]
-        private NavigationManager navigationManager { get; set; } = default!;
+        private NavigationManager _navigationManager { get; set; } = default!;
 
         [Inject]
         private IDialogService _dialogService { get; set; } = default!;
@@ -27,7 +27,7 @@ namespace ShiftPlanner.Client.Pages
 
         private void NavigateToMainPage()
         {
-            navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("/");
         }
 
         private async Task OpenShiftUpdateDialog(ShiftDefinition shift)

@@ -13,7 +13,7 @@ namespace ShiftPlanner.Client.Pages
     public partial class Index : ComponentBase
     {
         [Inject]
-        private NavigationManager navigationManager { get; set; }
+        private NavigationManager _navigationManager { get; set; } = default!;
 
         public Calendar calendar;
 
@@ -24,7 +24,7 @@ namespace ShiftPlanner.Client.Pages
 
         public void NavigateToConfigurePage()
         {
-            navigationManager.NavigateTo("configure");
+            _navigationManager.NavigateTo("configure");
         }
     }
 }

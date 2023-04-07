@@ -8,10 +8,10 @@ namespace ShiftPlanner.Client.Components
     public partial class ShiftSelectionPopup : ComponentBase
     {
         [Inject]
-        private IShiftService shiftService { get; set; }
+        private IShiftService _shiftService { get; set; } = default!;
 
         [Parameter]
-        public EventCallback<ShiftDefinition> ShiftSelected { get; set; }
+        public EventCallback<ShiftDefinition?> ShiftSelected { get; set; }
 
 
         private IEnumerable<ShiftDefinition> Shifts { get; set; } = new List<ShiftDefinition>();
@@ -19,7 +19,7 @@ namespace ShiftPlanner.Client.Components
 
         protected async override Task OnInitializedAsync()
         {
-            Shifts = await shiftService.GetShifts();
+            Shifts = await _shiftService.GetShifts();
             await base.OnInitializedAsync();
         }
 
@@ -36,6 +36,14 @@ namespace ShiftPlanner.Client.Components
         public IEnumerable<ShiftDefinition> OtherShifts
         {
             get => Shifts.Where(shift => shift.ShiftType == ShiftType.Other);
+        }
+
+        public async void ClearSelectedShift()
+        {
+            if(ShiftSelected.HasDelegate)
+            {
+                await ShiftSelected.InvokeAsync();
+            }
         }
     }
 }

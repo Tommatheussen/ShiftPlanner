@@ -21,7 +21,7 @@ namespace ShiftPlanner.Client.Components
         }
         
         
-        public void ShiftSelected(ShiftDefinition shift)
+        public void ShiftSelected(ShiftDefinition? shift)
         {
             Day.ExistingShift = shift;
             this._isOpen = false;
