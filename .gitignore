@@ -407,5 +407,4 @@ ASALocalRun/
 ShiftPlanner/**/obj
 ShiftPlanner/**/bin
 *.db
-ShiftPlanner/Server/shiftplanner-382814-8a893f652d6e.json
-ShiftPlanner/Server/client_secrets.json
+ShiftPlanner/Server/google-api-secrets.json
