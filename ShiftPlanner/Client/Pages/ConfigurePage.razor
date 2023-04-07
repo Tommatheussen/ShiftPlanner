@@ -6,16 +6,13 @@
     <MudButton StartIcon="@Icons.Material.Filled.PostAdd" OnClick="@AddNewShift" Color="Color.Inherit">Nieuw</MudButton>
 </MudAppBar>
 
-<button onclick="@CreateNewShift">Create</button>
+<div class="configure-grid">
+    @foreach (var shift in ShiftList)
+    {
+        <ShiftTemplate ShiftSelected="@OpenShiftUpdateDialog" Shift="shift" OnShiftDelete="@ConfirmShiftDelete"></ShiftTemplate>
+    }
+</div>
 
-@foreach (var shift in ShiftList)
-{
-    <ShiftTemplate ShiftSelected="@OpenShiftUpdateDialog" Shift="shift"></ShiftTemplate>
-}
-
-
-<MudDialogProvider
-    CloseButton="true"
-    Position="DialogPosition.Center"
-    CloseOnEscapeKey="true"
-                   />
+<MudDialogProvider CloseButton="true"
+                   Position="DialogPosition.Center"
+                   CloseOnEscapeKey="true" />

@@ -45,5 +45,10 @@ namespace ShiftPlanner.Client.Services
 
            return await GetShifts();
         }
+
+        public async Task DeleteShift(ShiftDefinition shift)
+        {
+            await _http.DeleteAsync($"api/shift/{shift.ShiftId}");
+        }
     }
 }

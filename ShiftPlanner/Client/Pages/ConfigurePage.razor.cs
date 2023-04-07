@@ -16,26 +16,13 @@ namespace ShiftPlanner.Client.Pages
         private NavigationManager navigationManager { get; set; } = default!;
 
         [Inject]
-        private IDialogService dialogService { get; set; } = default!;
-
-
+        private IDialogService _dialogService { get; set; } = default!;
 
         public IEnumerable<ShiftDefinition> ShiftList = new List<ShiftDefinition>();
 
         protected override async Task OnInitializedAsync()
         {
             ShiftList = await _shiftService.GetShifts();
-        }
-
-        private async Task CreateNewShift()
-        {
-            await _shiftService.CreateNewShift(new NewShift()
-            {
-                StartTime = TimeOnly.Parse("15:00"),
-                EndTime = TimeOnly.Parse("21:00"),
-                ShiftName = "ShiftTest",
-                ShiftType = ShiftType.Late
-            });
         }
 
         private void NavigateToMainPage()
@@ -48,30 +35,43 @@ namespace ShiftPlanner.Client.Pages
             var parameters = new DialogParameters();
             parameters.Add("shiftDefinition", shift);
 
-
-            var dialog = await dialogService.ShowAsync<ShiftFormDialog>("Shift aanpassen", parameters);
-            var result = await dialog.Result;
-            
-            if(!result.Canceled)
-            {
-                ShiftList = await _shiftService.RenewCachedShiftList();
-            }
-            //if (!result.Canceled)
-            //    {
-            //        //In a real world scenario we would reload the data from the source here since we "removed" it in the dialog already.
-            //        Guid.TryParse(result.Data.ToString(), out Guid deletedServer);
-            //        Servers.RemoveAll(item => item.Id == deletedServer);
-            //    }
-            //}
+            await OpenDialog("Shift aanpassen", parameters);
         }
 
         private async Task AddNewShift()
         {
-            var dialog = await dialogService.ShowAsync<ShiftFormDialog>("Nieuwe shift");
+            await OpenDialog("Nieuwe shift");
+        }
+
+        private async Task OpenDialog(string title, DialogParameters? parameters = null)
+        {
+            if(parameters == null)
+            {
+                parameters = new DialogParameters();
+            }
+
+            var dialog = await _dialogService.ShowAsync<ShiftFormDialog>(title, parameters);
             var result = await dialog.Result;
 
             if (!result.Canceled)
             {
+                ShiftList = await _shiftService.RenewCachedShiftList();
+            }
+        }
+
+        private async Task ConfirmShiftDelete(ShiftDefinition shift)
+        {
+            bool? deleteResult = await _dialogService.ShowMessageBox(
+                "Shift verwijderen",
+                $"Ben je zeker dat je de shift <b>{shift.ShiftName}</b> wil verwijderen?",
+                yesText: "Ja",
+                cancelText: "Nee"
+                );
+
+            if (deleteResult.HasValue && deleteResult.Value)
+            {
+                await _shiftService.DeleteShift(shift);
+
                 ShiftList = await _shiftService.RenewCachedShiftList();
             }
         }

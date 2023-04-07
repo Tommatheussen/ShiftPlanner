@@ -1,4 +1,8 @@
-﻿<MudPaper Class="pa-2" @onclick="@ShiftClicked">
+﻿<MudPaper Style="display: grid" Class="pa-2" @onclick="@ShiftClicked">
     <MudText Typo="Typo.subtitle2" Align="Align.Center">@Shift.ShiftName</MudText>
-    <MudText>@Shift.FullTimeSlot</MudText>
+    <MudText Align="Align.Center">@Shift.FullTimeSlot</MudText>
+    @if (ShowDelete)
+        {
+            <MudButton  StartIcon="@Icons.Material.Filled.DeleteForever" Color="Color.Error" OnClick="@ShiftDeleteClicked">Verwijder</MudButton>
+        }
 </MudPaper>

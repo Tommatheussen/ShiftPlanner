@@ -9,6 +9,7 @@ namespace ShiftPlanner.Client.Services
         Task CreateNewShift(NewShift shift);
         Task UpdateShift(ShiftDefinition shift);
         Task<IEnumerable<ShiftDefinition>> RenewCachedShiftList();
+        Task DeleteShift(ShiftDefinition shift);
     }
 }
 

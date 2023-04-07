@@ -1,0 +1,9 @@
+﻿.configure-grid {
+    width: 100vw;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+    grid-auto-rows: 1fr;
+    grid-gap: 12px;
+}

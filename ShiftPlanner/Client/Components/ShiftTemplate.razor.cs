@@ -12,11 +12,27 @@ namespace ShiftPlanner.Client.Components
         [Parameter]
         public EventCallback<ShiftDefinition> ShiftSelected { get; set; }
 
-        public async Task ShiftClicked()
+        [Parameter]
+        public EventCallback<ShiftDefinition> OnShiftDelete { get; set; }
+
+        private async Task ShiftClicked()
         {
             if (ShiftSelected.HasDelegate)
             {
                 await ShiftSelected.InvokeAsync(Shift);
+            }
+        }
+
+        private bool ShowDelete
+        {
+            get => OnShiftDelete.HasDelegate;
+        }
+
+        private async Task ShiftDeleteClicked()
+        {
+            if (OnShiftDelete.HasDelegate)
+            {
+                await OnShiftDelete.InvokeAsync(Shift);
             }
         }
     }
