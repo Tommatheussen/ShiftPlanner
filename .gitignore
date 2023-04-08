@@ -409,3 +409,4 @@ ShiftPlanner/**/bin
 *.db
 ShiftPlanner/Server/google-api-secrets.json
 storage
+ShiftPlanner/Server/data
